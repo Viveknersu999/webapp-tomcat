@@ -49,10 +49,13 @@ pipeline {
 	}
         
     stage ('DAST') {
-      steps {
-        sshagent(['zap']) {
-         sh 'ssh -o  StrictHostKeyChecking=no ubuntu@34.237.72.210 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://54.92.220.219:8080/webapptest/home" || true'
-        }
+      stage ('Deploy') {
+          steps {
+sh "cd /var/lib/jenkins/workspace/webapp-vivek/target/"
+sh "aws s3 cp webapptest.war s3://webapp-vivek/" 
+//sh "scp -o StrictHostKeyChecking=no Webapp-Pipeline/target/webapptest.war ec2-user@13.233.106.41:/home/ec2-user/apache-tomcat-9.0.75/webapps/webapptest.war"
+                }
+   }  
       }
     }    	    
 	    
