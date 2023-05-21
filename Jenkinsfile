@@ -19,13 +19,10 @@ pipeline {
 	    
       stage ('Deploy S3') {
           steps {
-sh "cd /var/lib/jenkins/workspace/webapp/target"
-sh "aws s3 cp webapptest.war s3://webappartifactory/" 
+            sh "cd /var/lib/jenkins/workspace/webapp/target"
+            sh "aws s3 cp webapptest.war s3://webappartifactory/" 
 //sh "scp -o StrictHostKeyChecking=no Webapp-Pipeline/target/webapptest.war ec2-user@13.233.106.41:/home/ec2-user/apache-tomcat-9.0.75/webapps/webapptest.war"
                 }
-   }  
-      }
-    }    	    
-	    
+            }  
+        }
     }
-}
